@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Hello World!</title>
+    </head>
+    <body>
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        
+        <a th:href="@{/login}" sec:authorize="!isAuthenticated()">login</a>
+        <a th:href="@{/register}" sec:authorize="!isAuthenticated()">join in</a>
+        
+        <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        
+        <span sec:authentication="name">사용자</span>
+        <span sec:authentication="principal.authorities">권한</span>
+    </body>
+</html>
